@@ -3,6 +3,8 @@ package com.develogical;
 import com.weather.Forecast;
 import org.junit.Test;
 
+import java.util.Random;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -23,6 +25,15 @@ when(delegate.forecastFor("London", "Wednesday")).thenReturn(new Forecast("Sunny
 
     }
 
+    @Test
+    public void RandomForcastLondonToday() {
 
+        int temperature = new Random().nextInt();
+        when(delegate.forecastFor("London", "Wednesday")).thenReturn(new Forecast("Sunny", temperature));
+        Forecast testForecast = underTest.forecastFor("London", "Wednesday");
+
+        assertEquals(temperature, testForecast.temperature());
+
+    }
 
 }
