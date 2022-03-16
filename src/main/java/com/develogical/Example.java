@@ -21,3 +21,5 @@ public class Example {
         System.out.println("Edinburgh temperature: " + edinburghForecast.temperature());
     }
 }
+
+
