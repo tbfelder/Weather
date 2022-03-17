@@ -12,6 +12,7 @@ public class CachingForcasterClient implements ForecasterClient {
 
     public int cachesize = 3;
     private ForecasterClient delegate;
+
     private static HashMap<Region, Map<Day, Forecast>> currentForecasts = new HashMap();
 
     public CachingForcasterClient(ForecasterClient delegate) {

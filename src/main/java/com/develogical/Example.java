@@ -8,8 +8,9 @@ import com.weather.Region;
 
 public class Example {
     public static void main(String[] args) {
-        lib1();
-        lib2();
+       // lib1();
+        // lib2();
+        lib3();
     }
 
     private static void lib1() {
@@ -38,5 +39,24 @@ public class Example {
 
         System.out.println("Edinburgh outlook: " + edinburghForecastSummary);
         System.out.println("Edinburgh temperature: " + edinburghForecastTemp);
+    }
+
+    private static void lib3() {
+        ForecasterClient forecaster = new CachingForcasterClient(new ForecasterAdapterDayToForecast());
+
+        Forecast londonForecast = forecaster.forecastFor(Region.LONDON, Day.MONDAY);
+
+        System.out.println("TEST London outlook: " + londonForecast.summary());
+        System.out.println("TEST London temperature: " + londonForecast.temperature());
+
+        Forecast edinburghForecast = forecaster.forecastFor(Region.EDINBURGH, Day.MONDAY);
+
+        System.out.println("TEST Edinburgh outlook: " + edinburghForecast.summary());
+        System.out.println("TEST dinburgh temperature: " + edinburghForecast.temperature());
+
+        Forecast edinburghForecast2 = forecaster.forecastFor(Region.EDINBURGH, Day.MONDAY);
+
+        System.out.println("TEST2 Edinburgh outlook: " + edinburghForecast2.summary());
+        System.out.println("TEST2 dinburgh temperature: " + edinburghForecast2.temperature());
     }
 }
