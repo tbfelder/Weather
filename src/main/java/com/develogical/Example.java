@@ -10,7 +10,7 @@ public class Example {
     public static void main(String[] args) {
        // lib1();
         // lib2();
-        lib3();
+        lib4();
     }
 
     private static void lib1() {
@@ -59,4 +59,28 @@ public class Example {
         System.out.println("TEST2 Edinburgh outlook: " + edinburghForecast2.summary());
         System.out.println("TEST2 dinburgh temperature: " + edinburghForecast2.temperature());
     }
+
+    private static void lib4() {
+        ForecasterClient cachingForecasterday = new CachingForcasterClient(new ForecasterAdapterDayToForecast());
+        ForecasterClient cachingForecaster = new CachingForcasterClient(new ForecasterAdapter());
+
+        ForecasterClient averageForecaster = new ForecasterClientAverage(cachingForecasterday, cachingForecaster);
+
+        Forecast londonForecast = averageForecaster.forecastFor(Region.LONDON, Day.MONDAY);
+
+        System.out.println("TEST London outlook: " + londonForecast.summary());
+        System.out.println("TEST London temperature: " + londonForecast.temperature());
+
+        Forecast edinburghForecast = averageForecaster.forecastFor(Region.EDINBURGH, Day.MONDAY);
+
+        System.out.println("TEST Edinburgh outlook: " + edinburghForecast.summary());
+        System.out.println("TEST dinburgh temperature: " + edinburghForecast.temperature());
+
+        Forecast edinburghForecast2 = averageForecaster.forecastFor(Region.EDINBURGH, Day.MONDAY);
+
+        System.out.println("TEST2 Edinburgh outlook: " + edinburghForecast2.summary());
+        System.out.println("TEST2 dinburgh temperature: " + edinburghForecast2.temperature());
+    }
+
+
 }
